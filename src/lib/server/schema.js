@@ -1,7 +1,7 @@
-import { pgTable, varchar, date, boolean } from "drizzle-orm/pg-core";
+import { pgTable, text, date, boolean } from "drizzle-orm/pg-core";
  
 export const subscribers = pgTable('subscribers', {
-  name: varchar('name' , { length: 56}),
+  name: text('name'),
   expireDate: date('expireDate', { mode: "date" }),
   deleted: boolean('deleted'),
 });

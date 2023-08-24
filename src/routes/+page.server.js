@@ -21,8 +21,19 @@ export const actions = {
     let month = date.getMonth();
     let day = date.getDate();
     let nextMonth = new Date(year,month+1,day);
+    let subs = await db.select().from(subscribers).where(eq(subscribers.name,name));
+    console.log(subs.length);
+      if(subs.length > 0)
+    {
+      console.log("its there");
+    await db.update(subscribers).set({expireDate:nextMonth, deleted:false}).where(eq(subscribers.name,name));
+    }
+      else
+    {
+      console.log("its not");
+    await db.insert(subscribers).values({name:name,expireDate:nextMonth, deleted:false});
+    }
 
-    await db.insert(subscribers).values({name:name , expireDate:nextMonth, deleted:false});
   }
 };
 
