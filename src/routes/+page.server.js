@@ -22,16 +22,7 @@ export const actions = {
     let day = date.getDate();
     let nextMonth = new Date(year,month+1,day);
 
-    const subscriber = await db.select().from(subscribers).where(eq(subscribers.name,name),eq(subscribers.deleted,false));
-
-    if(subscriber.length > 0)
-    {
-      await db.update(subscribers).set({expireDate:nextMonth}).where(eq(subscribers.name,name));
-    }
-    else
-    {
-      await db.insert(subscribers).values({name:name , expireDate:nextMonth, deleted:false});
-    }
+    await db.insert(subscribers).values({name:name , expireDate:nextMonth, deleted:false});
   }
 };
 
