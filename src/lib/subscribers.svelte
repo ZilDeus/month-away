@@ -1,16 +1,16 @@
 <script>
   export let subs;
 
-  const now = new Date();
   function hasExpired(expireDate)
   {
-    if(now.getFullYear()>expireDate.getFullYear())
-      return true;
-    if(now.getMonth()>expireDate.getMonth())
-      return true;
-    if(now.getDate()>expireDate.getDate())
-      return true;
-    return false;
+    const current = new Date();
+    if(current.getFullYear()!=expireDate.getFullYear())
+      return current.getFullYear()>expireDate.getFullYear();
+
+    if(current.getMonth()!=expireDate.getMonth())
+      return current.getMonth()>expireDate.getMonth();
+
+    return current.getDate()>expireDate.getDate();
   }
   subs.sort((a, b) => {
     if (a.expireDate.getMonth() > b.expireDate.getMonth()) {
